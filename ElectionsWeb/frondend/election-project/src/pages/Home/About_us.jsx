@@ -2,7 +2,7 @@ import services_svg from "../../assets/images/image 4.png";
 
 function About() {
   return (
-    <>
+    <div className="bg-[#312d2d] text-white pt-12">
       <h2 className="font-cairo text-3xl font-bold text-center  mb-3 ">
         الأنتخابات الأردنية
       </h2>
@@ -48,7 +48,7 @@ function About() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export default About;
