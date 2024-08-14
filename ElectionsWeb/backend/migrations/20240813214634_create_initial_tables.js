@@ -102,29 +102,58 @@ exports.up = function(knex) {
         table.text('answer').notNullable();
      
     })
-   ;
+
+    .createTable("partyrequest", function (table) {
+      table.increments("id").primary(); // عمود ID تلقائي التزايد ورقم تسلسلي
+      table.string("name", 255).notNullable(); // اسم الحزب أو القائمة
+      table.string("email", 255).notNullable(); // البريد الإلكتروني للممثل
+      table.string("phone", 20); // رقم الهاتف للممثل
+      table.string("list_name", 255); // اسم القائمة
+      table.string("delegate_name", 255); // اسم الممثل
+      table.string("delegate_phone", 20); // رقم هاتف الممثل
+      table.string("delegate_email", 255); // بريد إلكتروني للممثل
+      table.string("status", 255).defaultTo("pending"); // حالة الطلب (افتراضيًا 'معلق')
+      table.text("reason"); // سبب الموافقة أو الرفض
+      table.timestamp("created_at").defaultTo(knex.fn.now()); // تاريخ الإنشاء
+      table.timestamp("updated_at").defaultTo(knex.fn.now()); // تاريخ آخر تحديث
+    })
     
 
+    .createTable('LocalCandidatesRequest', function(table) {
+    table.bigIncrements('National_ID').primary(); // Primary Key with BIGINT and auto-increment
+    table.string('Name', 255).notNullable(); // اسم المرشح
+    table.string('List_Name', 255).notNullable(); // اسم القائمة
+    table.string('Email', 255).notNullable(); // البريد الإلكتروني
+    table.integer('Circle_ID').notNullable(); // ID الدائرة
+    table.string('Gender', 255).notNullable(); // الجنس
+    table.date('Birth_Date').notNullable(); // تاريخ الميلاد
+    table.string('Type_Of_Chair', 255).notNullable(); // نوع الكرسي
+    table.string('Religion', 255).notNullable(); // الدين
+    table.string('Status', 255).notNullable(); // حالة الطلب
+  })
+
+
 };
 
-exports.down = function(knex) {
-    return knex.schema
-      .dropTable('payment')
-      .dropTable('localList')
-      .dropTable('partyList')
-      .dropTable('Votes')
-      .dropTable('Voters')
-      .dropTable('Candidates')
-      .dropTable('Lists')
-      .dropTable('Circles')
-      .dropTable('ElectionType')
-      .dropTable('Users')
-      .dropTable('Admin')
-      .dropTable('LocalRequest')
-      .dropTable('Ads')
-      .dropTable('Debates')
-      .dropTable('Ads')
-      .dropTable('localList')
-
-      ;
+exports.down = function (knex) {
+  return (
+    knex.schema
+      // Drop tables in reverse order of creation, starting with those with foreign key dependencies
+      .dropTableIfExists("Ads")
+      .dropTableIfExists("Debates")
+      .dropTableIfExists("Faq")
+      .dropTableIfExists("partyrequest")
+      .dropTableIfExists("LocalCandidatesRequest")
+      .dropTableIfExists("payment")
+      .dropTableIfExists("Votes")
+      .dropTableIfExists("Voters")
+      .dropTableIfExists("Candidates") // Drop Candidates before Lists
+      .dropTableIfExists("Lists") // Drop Lists before Circles
+      .dropTableIfExists("Circles")
+      .dropTableIfExists("partyList")
+      .dropTableIfExists("ElectionType")
+      .dropTableIfExists("Admin")
+      .dropTableIfExists("Users")
+  );
 };
+
