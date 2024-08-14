@@ -99,13 +99,14 @@ function AutoplaySlider() {
         onClick={goToPrevious}
         className="absolute text-[20px] left-2 top-1/2 w-[50px] h-[50px] transform -translate-y-1/2 bg-white/50 p-2 rounded-full z-10"
       >
-        &#10094;
+        &#10095;
+        
       </button>
       <button
         onClick={goToNext}
         className="absolute right-2 text-[20px] top-1/2 w-[50px] h-[50px] transform -translate-y-1/2 bg-white/50 p-2 rounded-full z-10"
       >
-        &#10095;
+       &#10094;
       </button>
     </div>
   );

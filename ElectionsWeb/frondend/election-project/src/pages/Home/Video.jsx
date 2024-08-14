@@ -3,11 +3,11 @@ import Video1 from "../../assets/videos/videoplayback.mp4";
 function Video() {
   return (
     <>
-      <div className="text-center mb-4">
-        <h2 className="font-cairo text-3xl font-bold mt-12 mb-4">
+      <div className="text-center  bg-[#ffffff]">
+        <h2 className="font-cairo text-3xl font-bold pt-12 mb-4">
           آلية التصويت
         </h2>
-        <p className="font-cairo mb-8">
+        <p className="font-cairo">
           .في هذا المقطع، ستتعلم آلية التصويت في الانتخابات الأردنية وممارسة حقك
           الديمقراطي
         </p>
