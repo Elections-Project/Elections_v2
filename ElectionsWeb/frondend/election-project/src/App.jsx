@@ -1,14 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Log_in_new from './pages/Auth/Login/log_in_new';
+import Log_in from './pages/Auth/Login/sign_up';
+import Log_in_home from './pages/Auth/Login/log_in_home';
 import Candidates from './pages/Candidates/candidates';
 import Home from './pages/Home/home';
 import AboutUs from './pages/AboutUs/aboutUs';
-import Login from './pages/Auth/Login/login';
 import ElectionLists from './pages/ElectionLists/electionLists';
 import Results from './pages/Results/results';
 import Voting from './pages/Voting/voting';
 import './App.css';
 import './index.css';
+
+
 
 function App() {
   return (
@@ -17,10 +21,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/candidates" element={<Candidates />} />
         <Route path="/aboutUs" element={<AboutUs />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/electionLists" element={<ElectionLists />} />
         <Route path="/results" element={<Results />} />
         <Route path="/voting" element={<Voting />} />
+
+        <Route path="/log-in" element={<Log_in />} />
+        <Route path="/log-in-new" element={<Log_in_new />} />
+        <Route path="/log-in-home" element={<Log_in_home />} />
       </Routes>
     </Router>
   );
