@@ -22,11 +22,15 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} />
         <Route path="/candidates" element={<Candidates />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/electionLists" element={<ElectionLists />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/voting" element={<Voting />} /> */}
+        <Route path="/localRequest" element={<LocalRequest />} />
+        <Route path="/AddList" element={<AddList />} />
+
         <Route path="/voting" element={<Voting />} />
         <Route path="/localRequest" element={<LocalRequest />} />
         <Route path="/AddList" element={<AddList />} />

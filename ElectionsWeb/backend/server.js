@@ -33,6 +33,7 @@ app.use(express.json());
 const ChatRoutes = require('./routes/ChatRoutes');
 app.use('/api', ChatRoutes);
 
+
 // Register router
 const register_router = require(".//routes/register_router");
 app.use("/db/vs", register_router);
@@ -43,6 +44,7 @@ app.post('/api/lists', listController.createList);
 app.get('/api/lists', listController.getLists);
 app.put('/api/lists', listController.updateList);
 app.delete('/api/lists', listController.deleteList);
+
 
 
 
