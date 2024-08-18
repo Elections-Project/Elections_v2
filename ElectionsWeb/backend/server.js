@@ -19,6 +19,9 @@
 const express = require('express');
 const cors = require('cors');
 const listController = require('./controllers/listController'); // تأكد من أنك قد أنشأت هذا الملف
+const candiController = require('./controllers/candiController'); // تأكد من أنك قد أنشأت هذا الملف
+const userRoutes = require('./routes/userRoutes');
+const partyRoutes = require('./routes/partyRoutes');
 
 const app = express();
 const PORT = 3001;
@@ -33,7 +36,16 @@ app.get('/api/lists', listController.getLists);
 app.put('/api/lists', listController.updateList);
 app.delete('/api/lists', listController.deleteList);
 
+app.post('/api/candidates', candiController.createCandidate);
+app.use('/api', userRoutes);
+app.use('/api', partyRoutes);
+
+
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+
+

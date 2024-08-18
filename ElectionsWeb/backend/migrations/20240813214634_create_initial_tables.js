@@ -10,11 +10,13 @@ exports.up = function(knex) {
     table.integer('numOfCandidat').defaultTo(0);
     table.integer('count').defaultTo(0);
   })
+
+// Done 
     .createTable('Users', function(table) {
-      table.integer('N_Id').primary(); // تغيير الحقل إلى نوع integer
+      table.integer('N_Id').primary();    
       table.string('name');
       table.string('email').unique();
-      table.enum('gender', ['Male', 'Female', 'Other']);
+      table.enum('gender', ['Male', 'Female']);
       table.integer('age');
       table.string('city');
       table.string('religion');
@@ -22,30 +24,42 @@ exports.up = function(knex) {
       table.boolean('isOrganizer').defaultTo(false);
       table.string('password');
       table.string('otp'); 
-      table.string('token');
+      table.text('token');
       table.integer('circle_id').unsigned().references('circle_id').inTable('Circles').onDelete('SET NULL');
     })
     .createTable('ElectionType', function(table) {
       table.increments('id').primary();
       table.string('Election_type').notNullable(); // e.g., 'Party' or 'Local'
     })
-   
+    // Done
     .createTable('Lists', function(table) {
       table.increments('list_id').primary();
       table.string('name').notNullable();
-      table.string('list').notNullable();
-      table.string('logo');
+       table.string('org').notNullable();
+       table.string('logo');
+       table.string('circle').notNullable();
       table.integer('candidate').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE');
+      table.string('file_path'); // Column for storing the file path or URL
+
     })
+    // modify pk
     .createTable('Candidates', function(table) {
       table.integer('N_Id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE');
       table.integer('Election_id').unsigned().references('id').inTable('ElectionType').onDelete('CASCADE');
       table.integer('Circle').unsigned().references('circle_id').inTable('Circles').onDelete('CASCADE');
-      table.integer('LostId').unsigned().references('list_id').inTable('Lists').onDelete('CASCADE');
-      table.primary(['N_Id', 'Election_id']);
+      table.integer('ListId').unsigned().references('list_id').inTable('Lists').onDelete('CASCADE');
+      table.primary(['N_Id']);
       // Adding a unique constraint to N_Id
       table.unique('N_Id');
     })
+    // new
+    .createTable('CandidateLists', function(table) {
+        table.increments('id').primary(); // معرف فريد للجدول
+        table.integer('list_id').unsigned().references('list_id').inTable('Lists').onDelete('CASCADE'); // عمود list_id مع مرجع لجدول Lists
+        table.integer('candidate_id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE'); // عمود candidate_id مع مرجع لجدول Users
+        table.boolean('isApproved').defaultTo(false); // عمود isApproved مع القيمة الافتراضية false
+      })
+    
     .createTable('Voters', function(table) {
       table.integer('N_Id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE');
       table.primary('N_Id');
@@ -66,6 +80,7 @@ exports.up = function(knex) {
       table.string('organizer').notNullable();
       table.integer('Election_id').unsigned().references('id').inTable('ElectionType').onDelete('CASCADE');
     })
+    // Done
     .createTable('localList', function(table) {
       table.increments('id').primary();
       table.string('name').notNullable();
@@ -78,11 +93,11 @@ exports.up = function(knex) {
         .onDelete('CASCADE')
         .notNullable(); // Relate to Circles table
     })
-  .createTable('payment', function(table) {
-      table.increments('pay_id').primary();
-      table.decimal('amount', 10, 2).notNullable(); // Adjust precision and scale as needed
-      table.string('payment_method').notNullable(); // e.g., 'Credit Card', 'Cash', 'Bank Transfer'
-    })
+  // .createTable('payment', function(table) {
+  //     table.increments('pay_id').primary();
+  //     table.decimal('amount', 10, 2).notNullable(); // Adjust precision and scale as needed
+  //     table.string('payment_method').notNullable(); // e.g., 'Credit Card', 'Cash', 'Bank Transfer'
+  //   })
   .createTable('Admin', function(table) {
       table.increments('Admin_Id').primary(); // Unique identifier for each admin
       table.string('name').notNullable(); // Name of the admin
@@ -90,12 +105,18 @@ exports.up = function(knex) {
       table.string('password').notNullable(); // Hashed password for authentication
       table.string('role').notNullable(); // Admin role (e.g., Super Admin, Moderator)
   })
+
+// Done
   .createTable('Ads', function(table) {
-      table.increments('id').primary();
-      table.integer('candidate_id').unsigned().references('N_Id').inTable('Candidates').onDelete('CASCADE');
-      table.string('title').notNullable();
-      table.text('description').notNullable();
-      table.string('image_url');
+    table.increments('id').primary(); // رقم الطلب (إنشاء تلقائي)
+    table.boolean('request_type').notNullable(); // نوع الطلب (true/false)
+    table.boolean('acceptable').notNullable().defaultTo(false); // مقبول او لا
+    table.string('title'); // العنوان (غير إجباري)
+    table.string('image_url'); // رابط الصورة (غير إجباري)
+    table.text('description').notNullable(); // الوصف (إجباري)
+    table.integer('ad_plan'); // خطة الإعلان (عدد الثواني - غير إجباري)
+    table.string('candidate_one_id'); // الرقم الوطني للمرشح الأول (غير إجباري)
+    table.string('candidate_two_id'); // الرقم الوطني للمرشح الثاني (غير إجباري)
   })
   .createTable('Debates', function(table) {
       table.increments('id').primary();
@@ -104,6 +125,7 @@ exports.up = function(knex) {
       table.timestamp('date').notNullable();
       table.string('candidate_ids'); // This field can be adjusted based on how you plan to store multiple candidate IDs (e.g., JSON array or separate table for relationships)
   })
+  // Done
   .createTable('Faq', function(table) {
       table.increments('id').primary();
       table.text('question').notNullable();
@@ -135,6 +157,13 @@ exports.up = function(knex) {
       table.string('Religion', 255).notNullable(); // الدين
       table.string('Status', 255).notNullable(); // حالة الطلب
   })
+  // Done
+  .createTable('authorizedPersons', (table) => {
+    table.increments('auth_id').primary(); // Primary Key: auto-incremented ID
+    table.string('auth').notNullable(); // اسم المفوض
+    table.timestamps(true, true); // إضافة حقول created_at و updated_at تلقائياً
+  })
+  // Done
   .createTable('ChatMessages', function(table) {
       table.increments('M_Id').primary(); // Primary Key
       table.integer('CN_Id').unsigned().notNullable(); // Foreign Key
@@ -168,5 +197,10 @@ return (
     .dropTableIfExists("ElectionType")
     .dropTableIfExists("Admin")
     .dropTableIfExists("Users")
+    .dropTableIfExists("CandidateLists")
+    .dropTableIfExists("authorizedPersons")
+
+    
+    
 );
 };

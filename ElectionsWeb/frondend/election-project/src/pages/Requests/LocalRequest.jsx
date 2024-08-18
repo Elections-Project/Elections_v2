@@ -1,16 +1,25 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddList from './AddList';
+import AddPartyList from './AddPartyList';
+
+import Navbar from '../../layouts/navbar'
+import Footer from '../../layouts/footer'
+
 function LocalRequest() {
   const navigate = useNavigate();
 
   const handleCreateList = () => {
-    navigate('../AddList'); // الانتقال إلى صفحة إضافة القائمة
+    navigate('/AddList'); // الانتقال إلى صفحة إضافة القائمة
+  };
+  const handleCreateList2 = () => {
+    navigate('/AddPartyList'); // الانتقال إلى صفحة إضافة القائمة
   };
 
+
   return (
-    <div>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32">
+    <div><Navbar />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32 ">
         <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
           <span className="inline-block">
             <span className="relative whitespace-nowrap text-red-600">
@@ -31,39 +40,46 @@ function LocalRequest() {
           يرجى التأكد من استيفاء جميع الشروط القانونية قبل تقديم طلب الترشح. يجب أن تكون جميع البيانات المقدمة صحيحة ودقيقة.
           <span className="border-b border-dotted border-slate-300"></span>
         </p>
-        <div className="mt-12 flex flex-col justify-center gap-y-5 sm:mt-10 sm:flex-row sm:gap-y-0 sm:gap-x-6">
+        <p className="mx-auto -mt-4 max-w-2xl text-sm tracking-tight text-slate-700 sm:mt-6">
+  للاطلاع على كافة النصوص القانونية المتعلقة بالترشح والواردة بقانون الانتخابات لمجلس النواب لسنة 2024 
+  <a href="رابط_المستندات" className="border-b border-dotted border-slate-300 text-blue-600 hover:text-blue-800">
+    انقر هنا
+  </a>
+</p>
+        <div className="mt-12 flex flex-col justify-center gap-y-5  sm:mt-10 sm:flex-row sm:gap-y-0 sm:gap-x-9">
           <div
-            className="relative flex flex-1 flex-col items-stretch sm:flex-none"
+            className="relative flex flex-1 flex-row items-stretch gap-x-9 sm:flex-none "
             data-headlessui-state=""
           >
-            <button
-              className="group inline-flex ring-1 items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none ring-slate-200 text-slate-700 hover:text-slate-900 hover:ring-slate-300 active:bg-slate-100 active:text-slate-600 focus-visible:outline-blue-600 focus-visible:ring-slate-300 animate-fade-in-right"
-              id="headlessui-menu-button-:r4:"
-              aria-haspopup="true"
-              aria-expanded="false"
-              data-headlessui-state=""
-              type="button"
-              onClick={handleCreateList} // استدعاء الدالة عند النقر على الزر
-            >
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth={0}
-                role="img"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                className="h-3 w-3 flex-none fill-current text-blue-600"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" />
-              </svg>
-              <span className="ml-3">إنشاء قائمة</span>
-            </button>
+       <button
+  className="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none ring-1 bg-green-600 text-white hover:bg-green-700 focus:ring-4 focus:ring-green-300 animate-fade-in-right"
+  id="headlessui-menu-button-:r4:"
+  aria-haspopup="true"
+  aria-expanded="false"
+  data-headlessui-state=""
+  type="button"
+  onClick={handleCreateList} // استدعاء الدالة عند النقر على الزر
+>
+  <span className="ml-3">إنشاء قائمة محلية</span>
+</button>
+<button
+  className="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none ring-1 bg-green-600 text-white hover:bg-green-700 focus:ring-4 focus:ring-green-300 animate-fade-in-right"
+  id="headlessui-menu-button-:r4:"
+  aria-haspopup="true"
+  aria-expanded="false"
+  data-headlessui-state=""
+  type="button"
+  onClick={handleCreateList2} // استدعاء الدالة عند النقر على الزر
+>
+  <span className="ml-3">إنشاء قائمة حزبية</span>
+</button>
+
+
           </div>
         </div>
       </div>
+      {/* <div><Footer /></div> */}
+    
     </div>
   );
 }

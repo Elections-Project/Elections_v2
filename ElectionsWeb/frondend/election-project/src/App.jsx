@@ -7,8 +7,11 @@ import Login from './pages/Auth/Login/login';
 import ElectionLists from './pages/ElectionLists/electionLists';
 import Results from './pages/Results/results';
 import Voting from './pages/Voting/voting';
-import LocalRequest from './pages/Requests/localRequest';
+import LocalRequest from './pages/Requests/LocalRequest';
+import CandidatesRequest from './pages/Requests/CandidatesRequest';
 import AddList from './pages/Requests/AddList';
+import AddPartyList from './pages/Requests/AddPartyList';
+
 
 import './App.css';
 import './index.css';
@@ -17,15 +20,17 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/candidates" element={<Candidates />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/electionLists" element={<ElectionLists />} />
         <Route path="/results" element={<Results />} />
-        <Route path="/voting" element={<Voting />} /> */}
+        <Route path="/voting" element={<Voting />} />
         <Route path="/localRequest" element={<LocalRequest />} />
         <Route path="/AddList" element={<AddList />} />
+        <Route path="/AddPartyList" element={<AddPartyList />} />
+        <Route path="/CandidatesRequest" element={<CandidatesRequest />} />
 
       </Routes>
     </Router>
