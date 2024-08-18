@@ -35,6 +35,7 @@ function App() {
       <Routes>
 
         {/* <Route path="/" element={<Navigate to="/debate-screen" replace />} /> */}
+        {/* <Route path="/" element={<Navigate to="/debate-screen" replace />} /> */}
         <Route path="/debate-screen" element={<Debate_screen />} />
         <Route path="/debate-room/:roomId" element={<Debate_Room />} />
         <Route path="/debate" element={<Debate_ />} />
