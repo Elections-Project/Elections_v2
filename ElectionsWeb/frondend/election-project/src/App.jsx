@@ -10,7 +10,8 @@ import AboutUs from './pages/AboutUs/aboutUs';
 import ElectionLists from './pages/ElectionLists/electionLists';
 import Results from './pages/Results/results';
 import Voting from './pages/Voting/voting';
-import LocalRequest from './pages/Requests/localRequest';
+import LocalRequest from './pages/Requests/LocalRequest';
+import CandidatesRequest from './pages/Requests/CandidatesRequest';
 import AddList from './pages/Requests/AddList';
 
 import Debate_ from './pages/Debate/debate';
@@ -56,6 +57,8 @@ function App() {
         <Route path="/voting" element={<Voting />} />
         <Route path="/localRequest" element={<LocalRequest />} />
         <Route path="/AddList" element={<AddList />} />
+        <Route path="/AddPartyList" element={<AddPartyList />} />
+        <Route path="/CandidatesRequest" element={<CandidatesRequest />} />
 
         <Route path="/voting" element={<Voting />} />
 
