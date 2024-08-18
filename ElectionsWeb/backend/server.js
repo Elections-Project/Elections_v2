@@ -33,6 +33,10 @@ app.use(express.json());
 const ChatRoutes = require('./routes/ChatRoutes');
 app.use('/api', ChatRoutes);
 
+// Chat Routes
+const AdsRoutes = require('./routes/AdsRoutes');
+app.use('/api', AdsRoutes);
+
 // Routes
 // app.use('/api', listRoutes);
 app.post('/api/lists', listController.createList);
