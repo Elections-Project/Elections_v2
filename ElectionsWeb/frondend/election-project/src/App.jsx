@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Log_in from './pages/Auth/Login/sign_up';
 import Log_in_new from './pages/Auth/Login/log_in_new';
 import Log_in_home from './pages/Auth/Login/log_in_home';
@@ -12,6 +12,9 @@ import Results from './pages/Results/results';
 import Voting from './pages/Voting/voting';
 import LocalRequest from './pages/Requests/localRequest';
 import AddList from './pages/Requests/AddList';
+import Debate from './pages/Debate/debate';
+import Debate_Room from './pages/Debate/room';
+import Debate_screen from './pages/Debate/debate_screen';
 
 import './App.css';
 import './index.css';
@@ -22,12 +25,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Navigate to="/debate-screen" replace />} /> */}
+        <Route path="/debate-screen" element={<Debate_screen />} />
+        <Route path="/debate-room/:roomId" element={<Debate_Room />} />
+        <Route path="/debate" element={<Debate />} />
+        <Route path="/" element={<Home />} />
         <Route path="/candidates" element={<Candidates />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/electionLists" element={<ElectionLists />} />
         <Route path="/results" element={<Results />} />
-        <Route path="/voting" element={<Voting />} /> */}
+        <Route path="/voting" element={<Voting />} />
         <Route path="/localRequest" element={<LocalRequest />} />
         <Route path="/AddList" element={<AddList />} />
 
