@@ -1,11 +1,9 @@
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('Lists').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('Lists').insert([
-        { name: 'Party List', org: 'Organization A', logo: 'logo1.png', circle: 'Circle 1', file_path: 'path/to/file1' },
-        { name: 'Local List', org: 'Organization B', logo: 'logo2.png', circle: 'Circle 2', file_path: 'path/to/file2' },
-      ]);
-    });
-};
+    return knex('Lists').del()
+      .then(function () {
+        return knex('Lists').insert([
+          { list_id: 1, name: 'List A', list: 'A', logo: 'logo_a.png', candidate: '1' },
+          { list_id: 2, name: 'List B', list: 'B', logo: 'logo_b.png', candidate: '2' }
+        ]);
+      });
+  };

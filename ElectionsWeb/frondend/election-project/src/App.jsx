@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Log_in_new from './pages/Auth/Login/log_in_new';
 import Log_in from './pages/Auth/Login/sign_up';
+import Log_in_new from './pages/Auth/Login/log_in_new';
 import Log_in_home from './pages/Auth/Login/log_in_home';
+import Update_password from './pages/Auth/Login/update_password';
 import Candidates from './pages/Candidates/candidates';
 import Home from './pages/Home/home';
 import AboutUs from './pages/AboutUs/aboutUs';
@@ -12,9 +13,10 @@ import Voting from './pages/Voting/voting';
 import LocalRequest from './pages/Requests/LocalRequest';
 import CandidatesRequest from './pages/Requests/CandidatesRequest';
 import AddList from './pages/Requests/AddList';
-import AddPartyList from './pages/Requests/AddPartyList';
-
-
+import PaymentPage from './pages/Payment/payment';
+import Invoice from './pages/Invoice/Invoice';
+import ADS_Page from './pages/RequestAds/AdsPage';
+import Debate from './pages/RequestAds/Debate';
 import './App.css';
 import './index.css';
 
@@ -32,6 +34,16 @@ function App() {
         <Route path="/voting" element={<Voting />} />
         <Route path="/localRequest" element={<LocalRequest />} />
         <Route path="/AddList" element={<AddList />} />
+        <Route path="/BuyAds" element={<ADS_Page />} />
+        <Route path="/BayDebate" element={<Debate />} />
+        
+
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/invoice" element={<Invoice />} />
+
+        <Route path="/voting" element={<Voting />} />
+        <Route path="/localRequest" element={<LocalRequest />} />
+        <Route path="/AddList" element={<AddList />} />
         <Route path="/AddPartyList" element={<AddPartyList />} />
         <Route path="/CandidatesRequest" element={<CandidatesRequest />} />
 
@@ -40,6 +52,8 @@ function App() {
         <Route path="/log-in" element={<Log_in />} />
         <Route path="/log-in-new" element={<Log_in_new />} />
         <Route path="/log-in-home" element={<Log_in_home />} />
+        <Route path="/update-pass" element={<Update_password></Update_password>}></Route>
+
       </Routes>
     </Router>
   );

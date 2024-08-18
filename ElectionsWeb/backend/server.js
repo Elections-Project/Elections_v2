@@ -17,12 +17,15 @@
 // });
 
 const express = require('express');
+const db = require('./config/db'); // استيراد الاتصال بقاعدة البيانات
+require('dotenv').config();
 const cors = require('cors');
 const listController = require('./controllers/listController'); // تأكد من أنك قد أنشأت هذا الملف
 const candiController = require('./controllers/candiController'); // تأكد من أنك قد أنشأت هذا الملف
 const userRoutes = require('./routes/userRoutes');
 const partyRoutes = require('./routes/partyRoutes');
 
+const listRoutes = require('./routes/listRoutes');
 const app = express();
 const PORT = 3001;
 
@@ -30,15 +33,29 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
+// Chat Routes
+const ChatRoutes = require('./routes/ChatRoutes');
+app.use('/api', ChatRoutes);
+
+
+// Chat Routes
+const AdsRoutes = require('./routes/AdsRoutes');
+app.use('/api', AdsRoutes);
+
+
+// Register router
+const register_router = require(".//routes/register_router");
+app.use("/db/vs", register_router);
+
+
 // Routes
+// app.use('/api', listRoutes);
 app.post('/api/lists', listController.createList);
 app.get('/api/lists', listController.getLists);
 app.put('/api/lists', listController.updateList);
 app.delete('/api/lists', listController.deleteList);
 
-app.post('/api/candidates', candiController.createCandidate);
-app.use('/api', userRoutes);
-app.use('/api', partyRoutes);
+
 
 
 // Start Server

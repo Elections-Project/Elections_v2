@@ -192,7 +192,6 @@ return (
     .dropTableIfExists("Voters")
     .dropTableIfExists("Candidates") // Drop Candidates before Lists
     .dropTableIfExists("Lists") // Drop Lists before Circles
-    .dropTableIfExists("Circles")
     .dropTableIfExists("partyList")
     .dropTableIfExists("ElectionType")
     .dropTableIfExists("Admin")
@@ -202,5 +201,7 @@ return (
 
     
     
+    .dropTableIfExists("localList") // Drop localList before Circles
+    .dropTableIfExists("Circles") // Finally, drop Circles
 );
 };
