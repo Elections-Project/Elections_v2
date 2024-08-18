@@ -24,6 +24,7 @@ import Invoice from './pages/Invoice/Invoice';
 import ADS_Page from './pages/RequestAds/AdsPage';
 import Debate from './pages/RequestAds/Debate';
 
+import AddPartyList from './pages/Requests/AddPartyList';
 import './App.css';
 import './index.css';
 
