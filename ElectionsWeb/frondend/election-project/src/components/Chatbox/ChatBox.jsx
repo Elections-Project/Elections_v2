@@ -13,7 +13,7 @@ const ChatBox = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3000/api/chatuser", {
+      const response = await axios.post("http://localhost:3001/api/chatuser", {
         UserMessage: inputMessage,
       });
       setInputMessage("");
@@ -25,7 +25,7 @@ const ChatBox = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/getmessages");
+      const response = await axios.get("http://localhost:3001/api/getmessages");
 
       const sortedMessages = response.data.sort((a, b) => a.M_Id - b.M_Id);
       setMessages(sortedMessages);

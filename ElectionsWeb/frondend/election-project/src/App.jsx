@@ -12,9 +12,16 @@ import Results from './pages/Results/results';
 import Voting from './pages/Voting/voting';
 import LocalRequest from './pages/Requests/localRequest';
 import AddList from './pages/Requests/AddList';
-import Debate from './pages/Debate/debate';
+
+import Debate_ from './pages/Debate/debate';
 import Debate_Room from './pages/Debate/room';
 import Debate_screen from './pages/Debate/debate_screen';
+
+
+import PaymentPage from './pages/Payment/payment';
+import Invoice from './pages/Invoice/Invoice';
+import ADS_Page from './pages/RequestAds/AdsPage';
+import Debate from './pages/RequestAds/Debate';
 
 import './App.css';
 import './index.css';
@@ -25,10 +32,12 @@ function App() {
   return (
     <Router>
       <Routes>
+
         {/* <Route path="/" element={<Navigate to="/debate-screen" replace />} /> */}
         <Route path="/debate-screen" element={<Debate_screen />} />
         <Route path="/debate-room/:roomId" element={<Debate_Room />} />
-        <Route path="/debate" element={<Debate />} />
+        <Route path="/debate" element={<Debate_ />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/candidates" element={<Candidates />} />
         <Route path="/aboutUs" element={<AboutUs />} />
@@ -37,6 +46,12 @@ function App() {
         <Route path="/voting" element={<Voting />} />
         <Route path="/localRequest" element={<LocalRequest />} />
         <Route path="/AddList" element={<AddList />} />
+        <Route path="/BuyAds" element={<ADS_Page />} />
+        <Route path="/BayDebate" element={<Debate />} />
+        
+
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/invoice" element={<Invoice />} />
 
         <Route path="/voting" element={<Voting />} />
         <Route path="/localRequest" element={<LocalRequest />} />
