@@ -17,10 +17,16 @@ import AddPartyList from './pages/Requests/AddPartyList'
 import Debate_ from './pages/Debate/debate';
 import Debate_Room from './pages/Debate/room';
 import Debate_screen from './pages/Debate/debate_screen';
+import ContactUs from './pages/ContactUs/contactUs';
+
+
+
 import PaymentPage from './pages/Payment/payment';
 import Invoice from './pages/Invoice/Invoice';
 import ADS_Page from './pages/RequestAds/AdsPage';
 import Debate from './pages/RequestAds/Debate';
+
+import AddPartyList from './pages/Requests/AddPartyList';
 import './App.css';
 import './index.css';
 
@@ -31,6 +37,7 @@ function App() {
     <Router>
       <Routes>
 
+        {/* <Route path="/" element={<Navigate to="/debate-screen" replace />} /> */}
         {/* <Route path="/" element={<Navigate to="/debate-screen" replace />} /> */}
         <Route path="/debate-screen" element={<Debate_screen />} />
         <Route path="/debate-room/:roomId" element={<Debate_Room />} />
@@ -63,6 +70,8 @@ function App() {
         <Route path="/log-in-home" element={<Log_in_home />} />
         <Route path="/update-pass" element={<Update_password></Update_password>}></Route>
 
+        <Route path="/contact" element={<ContactUs />}></Route>
+        <Route path="/about" element={<AboutUs />}></Route>
       </Routes>
     </Router>
   );
