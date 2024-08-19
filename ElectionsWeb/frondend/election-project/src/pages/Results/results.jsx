@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from '../../layouts/navbar';
 import Footer from '../../layouts/footer';
-import PieActiveArc from './pieChart';
 
 
 const Results = () => {
@@ -9,9 +8,7 @@ const Results = () => {
         <>
             <Navbar />
             <main>
-                <div className="chart-container">
-                    <PieActiveArc></PieActiveArc>
-                </div>
+                <h1>components</h1>
                 {/* components */}
                 {/* components */}
                 {/* components */}

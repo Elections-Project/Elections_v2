@@ -13,32 +13,19 @@ const ChatBox = () => {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem('token');
-        if (token){
-      const response = await axios.post("http://localhost:3001/api/chatuser", 
-        { UserMessage: inputMessage }, 
-        { headers: { Authorization: `Bearer ${token}` } } // إضافة التوكن في رأس الطلب
-      );
+      const response = await axios.post("http://localhost:3001/api/chatuser", {
+        UserMessage: inputMessage,
+      });
       setInputMessage("");
-      
-        fetchMessages();
-      }else {
-      alert("للاستفادة من ميزة الدردشة، يتعين عليك تسجيل الدخول أولاً.")
-      setInputMessage("");
-
-      }
+      fetchMessages();
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   }
-  const token = localStorage.getItem('token');
+
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/getmessages', {
-        headers: {
-          Authorization: `Bearer ${token}`, // التأكد من إرسال التوكن في header
-        },
-      });;
+      const response = await axios.get("http://localhost:3001/api/getmessages");
 
       const sortedMessages = response.data.sort((a, b) => a.M_Id - b.M_Id);
       setMessages(sortedMessages);
@@ -47,13 +34,8 @@ const ChatBox = () => {
     }
   };
 
-
-  
   useEffect(() => {
-    if (token){
-      fetchMessages();
-    }
-    
+    fetchMessages();
   }, [isOpen]);
 
   useEffect(() => {

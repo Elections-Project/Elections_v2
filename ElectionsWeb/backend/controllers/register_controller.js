@@ -49,10 +49,8 @@ exports.sign_up = async (req, res) => {
       .where('N_Id', nid)
       .first();
 
-    if (!user) {
-      res.json("nothing");
-    }
-    else if (user && user.password) {
+
+    if (user && user.password) {
       res.json("password");
     } else {
       const random_pass = generateRandomPassword();
@@ -85,12 +83,18 @@ exports.log_in = async (req, res) => {
   console.log("inside log in");
   try {
     const user = await db('Users')
-    .select('N_Id', 'name', 'password') // استبدل 'Username' باسم العمود الفعلي لاسم المستخدم
-    .where('N_Id', nid)
-    .first();
+      .select('*')
+      .where('N_Id', nid)
+      .first();
 
     if (user && await bcrypt.compare(pass, user.password)) {
-      const token = jwt.sign( user , "tegthtyh3c25d5a5ddfdfd", { expiresIn: '1h' });
+      const token = jwt.sign(user, "tegthtyh3c25d5a5ddfdfd", { expiresIn: '1h' });
+
+      await db('Users')
+        .where('N_Id', nid)
+        .update({
+          token: token,
+        });
 
       console.log("Log in successfully :) !!");
 
