@@ -16,6 +16,8 @@ import AddList from './pages/Requests/AddList';
 import Debate_ from './pages/Debate/debate';
 import Debate_Room from './pages/Debate/room';
 import Debate_screen from './pages/Debate/debate_screen';
+import ContactUs from './pages/ContactUs/contactUs';
+
 
 
 import PaymentPage from './pages/Payment/payment';
@@ -64,6 +66,8 @@ function App() {
         <Route path="/log-in-home" element={<Log_in_home />} />
         <Route path="/update-pass" element={<Update_password></Update_password>}></Route>
 
+        <Route path="/contact" element={<ContactUs />}></Route>
+        <Route path="/about" element={<AboutUs />}></Route>
       </Routes>
     </Router>
   );

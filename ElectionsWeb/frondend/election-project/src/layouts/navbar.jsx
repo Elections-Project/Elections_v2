@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import { useLocation } from 'react-router-dom'
 import logoJOR from '../assets/images/logoJOR.png'
+
+import { Fragment } from 'react'
 
 const navigation = [
     { name: 'الرئيسية', href: '/' },
@@ -17,11 +19,21 @@ const navigation = [
     },
     { name: 'صوت الآن', href: '/voting' },
     { name: 'تواصل معنا', href: '/contactUs' },
+    { name: 'من نحن', href: '/about' },
+    { name: 'مناظرات', href: '/debates' },
 ]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
+
+const user = {
+    nationalId: '1234567890',
+    name: 'John Doe',
+    email: 'john@example.com',
+    gender: 'Male',
+    age: 30
+};
 
 export default function Navbar() {
     const location = useLocation();
@@ -137,7 +149,7 @@ export default function Navbar() {
                                 </Menu>
 
                                 {/* Profile dropdown */}
-                                <Menu as="div" className="relative ml-3">
+                                <Menu as="div" className="relative">
                                     <div>
                                         <MenuButton className="relative flex rounded-full bg-[#6E0B00] text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#6E0B00]">
                                             <span className="absolute -inset-1.5" />
@@ -149,23 +161,33 @@ export default function Navbar() {
                                             />
                                         </MenuButton>
                                     </div>
-                                    <MenuItems
-                                        className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                    >
+                                    <MenuItems className="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-md bg-white py-4 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transform -translate-x-full sm:translate-x-0">
+                                        <div className="px-6 py-3 text-sm text-gray-900">
+                                            <div className="font-medium text-xl border-b pb-3 mb-3">{user.name}</div>
+                                            <div className="text-gray-600 mb-2">
+                                                <strong className="text-gray-900">الرقم الوطني:</strong> {user.nationalId}
+                                            </div>
+                                            <div className="text-gray-600 mb-2">
+                                                <strong className="text-gray-900">البريد الإلكتروني:</strong> {user.email}
+                                            </div>
+                                            <div className="text-gray-600 mb-2">
+                                                <strong className="text-gray-900">الجنس:</strong> {user.gender}
+                                            </div>
+                                            <div className="text-gray-600 mb-2">
+                                                <strong className="text-gray-900">العمر:</strong> {user.age}
+                                            </div>
+                                        </div>
                                         <MenuItem>
-                                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                                Your Profile
-                                            </a>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                                Settings
-                                            </a>
-                                        </MenuItem>
-                                        <MenuItem>
-                                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                                Sign out
-                                            </a>
+                                            {({ active }) => (
+                                                <a
+
+                                                    href="#"
+                                                    className={`${active ? 'bg-red-700' : 'bg-red-600'
+                                                        } block px-6 py-3 text-sm text-center font-medium text-white transition-colors duration-200`}
+                                                >
+                                                    تسجيل الخروج
+                                                </a>
+                                            )}
                                         </MenuItem>
                                     </MenuItems>
                                 </Menu>
@@ -228,7 +250,8 @@ export default function Navbar() {
                         </div>
                     </DisclosurePanel>
                 </>
-            )}
-        </Disclosure>
+            )
+            }
+        </Disclosure >
     )
 }

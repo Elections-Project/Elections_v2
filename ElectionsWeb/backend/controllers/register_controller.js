@@ -49,8 +49,10 @@ exports.sign_up = async (req, res) => {
       .where('N_Id', nid)
       .first();
 
-
-    if (user && user.password) {
+    if (!user) {
+      res.json("nothing");
+    }
+    else if (user && user.password) {
       res.json("password");
     } else {
       const random_pass = generateRandomPassword();
