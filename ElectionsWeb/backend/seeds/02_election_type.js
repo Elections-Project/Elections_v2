@@ -4,8 +4,8 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('ElectionType').insert([
-        {Election_type: 'Party'},
-        {Election_type: 'Local'},
+        {id:1,Election_type: 'Party'},
+        {id:2,Election_type: 'Local'},
       ]);
     });
 };
