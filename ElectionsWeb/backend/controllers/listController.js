@@ -1,35 +1,27 @@
 const knex = require('../config/db');
 
-// exports.createList = async (req, res) => {
-//     const { name, logo, list } = req.body;
-
-//     if (!name || !logo || !list) {
-//         return res.status(400).json({ error: 'مفقود بيانات: name و logo و list مطلوبين' });
-//     }
-
-//     try {
-//         await knex('Lists').insert({ name, logo, list });
-//         res.status(201).json({ message: 'تمت إضافة القائمة بنجاح!' });
-//     } catch (error) {
-//         console.error('خطأ أثناء إضافة القائمة:', error);
-//         res.status(500).json({ error: 'حدث خطأ أثناء إضافة القائمة.' });
-//     }
-// };
 exports.createList = async (req, res) => {
-    const { name, org, circle, logo, file_path } = req.body;
+    const { N_Id, circle_id, name } = req.body;
 
-    if (!name || !org || !logo || !circle || !file_path) {
-        return res.status(400).json({ error: 'مفقود بيانات: name و org و logo و circle و file_path مطلوبين' });
+    if (!name || !N_Id || !circle_id) {
+        return res.status(400).json({ error: 'مفقود بيانات: name و N_Id و circle_id مطلوبين' });
     }
 
     try {
-        const [list_id] = await knex('Lists').insert({ name, org, circle, logo, file_path }).returning('list_id');
-        res.status(201).json({ message: 'تمت إضافة القائمة بنجاح!', list_id });
+        // Check if N_Id exists in Users
+        const userExists = await knex('Users').where('N_Id', N_Id).first();
+        if (!userExists) {
+            return res.status(400).json({ error: 'N_Id غير موجود في جدول Users' });
+        }
+
+        const [id] = await knex('localList').insert({ name, N_Id, circle_id }).returning('id');
+        res.status(201).json({ message: 'تمت إضافة القائمة بنجاح!', id });
     } catch (error) {
-        console.error('خطأ أثناء إضافة القائمة:', error);
+        console.error('Error while adding the list:', error.message);
         res.status(500).json({ error: 'حدث خطأ أثناء إضافة القائمة.' });
     }
 };
+
 
 
 exports.getLists = async (req, res) => {

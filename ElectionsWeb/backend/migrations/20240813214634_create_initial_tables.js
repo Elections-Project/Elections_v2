@@ -42,6 +42,8 @@ exports.up = function(knex) {
       table.string('file_path'); // Column for storing the file path or URL
 
     })
+
+
     // modify pk
     .createTable('Candidates', function(table) {
       table.integer('N_Id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE');
@@ -52,47 +54,55 @@ exports.up = function(knex) {
       // Adding a unique constraint to N_Id
       table.unique('N_Id');
     })
-    // new
-    .createTable('CandidateLists', function(table) {
-        table.increments('id').primary(); // معرف فريد للجدول
-        table.integer('list_id').unsigned().references('list_id').inTable('Lists').onDelete('CASCADE'); // عمود list_id مع مرجع لجدول Lists
-        table.integer('candidate_id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE'); // عمود candidate_id مع مرجع لجدول Users
-        table.boolean('isApproved').defaultTo(false); // عمود isApproved مع القيمة الافتراضية false
-      })
-    
-    .createTable('Voters', function(table) {
-      table.integer('N_Id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE');
-      table.primary('N_Id');
-    })
-    .createTable('Votes', function(table) {
-      table.increments('Id').primary();
-      table.integer('candidate_id').unsigned().references('N_Id').inTable('Candidates').onDelete('CASCADE');
-      table.integer('voter_id').unsigned().references('N_Id').inTable('Voters').onDelete('CASCADE');
-      table.boolean('isLocal').defaultTo(false);
-      table.boolean('isParty').defaultTo(false);
-      table.boolean('isWhite').defaultTo(false);
-    })
-    .createTable('partyList', function(table) {
-      table.increments('party_id').primary();
-      table.string('name').notNullable();
-      table.string('logo');
-      table.integer('count').defaultTo(0);
-      table.string('organizer').notNullable();
-      table.integer('Election_id').unsigned().references('id').inTable('ElectionType').onDelete('CASCADE');
-    })
+    // // new
+    // .createTable('CandidateLists', function(table) {
+    //     table.increments('id').primary(); // معرف فريد للجدول
+    //     table.integer('list_id').unsigned().references('list_id').inTable('Lists').onDelete('CASCADE'); // عمود list_id مع مرجع لجدول Lists
+    //     table.integer('candidate_id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE'); // عمود candidate_id مع مرجع لجدول Users
+    //     table.boolean('isApproved').defaultTo(false); // عمود isApproved مع القيمة الافتراضية false
+    //   })
+
+
+
+  
+        .createTable('Voters', function(table) {
+          table.integer('N_Id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE');
+          table.primary('N_Id');
+        })
+        .createTable('Votes', function(table) {
+          table.increments('Id').primary();
+          table.integer('candidate_id').unsigned().references('N_Id').inTable('Candidates').onDelete('CASCADE');
+          table.integer('voter_id').unsigned().references('N_Id').inTable('Voters').onDelete('CASCADE');
+          table.boolean('isLocal').defaultTo(false);
+          table.boolean('isParty').defaultTo(false);
+          table.boolean('isWhite').defaultTo(false);
+        })
+        
+
+
+
+    // .createTable('partyList', function(table) {
+    //   table.increments('party_id').primary();
+    //   table.string('name').notNullable();
+    //   table.string('logo');
+    //   table.integer('count').defaultTo(0);
+    //   table.string('organizer').notNullable();
+    //   table.integer('Election_id').unsigned().references('id').inTable('ElectionType').onDelete('CASCADE');
+    // })
     // Done
-    .createTable('localList', function(table) {
-      table.increments('id').primary();
-      table.string('name').notNullable();
-      table.integer('count').defaultTo(0);
-      table
-        .integer('circle_id')
-        .unsigned()
-        .references('circle_id')
-        .inTable('Circles')
-        .onDelete('CASCADE')
-        .notNullable(); // Relate to Circles table
-    })
+  // .createTable('localList', function(table) {
+  //       table.increments('id').primary(); // Primary key
+  //       table.string('name').notNullable();
+  //       table.integer('numOfVotes').defaultTo(0); // New column with default value of 0
+  //       table
+  //         .integer('circle_id')
+  //         .unsigned()
+  //         .references('circle_id')
+  //         .inTable('Circles')
+  //         .onDelete('CASCADE')
+  //         .notNullable(); // Foreign key
+  //     })
+  
   // .createTable('payment', function(table) {
   //     table.increments('pay_id').primary();
   //     table.decimal('amount', 10, 2).notNullable(); // Adjust precision and scale as needed
@@ -174,7 +184,47 @@ exports.up = function(knex) {
 
       // Foreign Key Reference to Users table's N_Id column
       table.foreign('CN_Id').references('N_Id').inTable('Users').onDelete('CASCADE');
-  });
+  })
+    
+  .createTable('localList', function(table) {
+    table.increments('id').primary(); // Primary key
+    table.integer('N_Id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE');
+    table.string("status").defaultTo("pending");
+    table.string('name').notNullable();
+    table.integer('numOfVotes').defaultTo(0); // New column with default value of 0
+    table
+      .integer('circle_id')
+      .unsigned()
+      .references('circle_id')
+      .inTable('Circles')
+      .onDelete('CASCADE')
+      .notNullable(); // Foreign key
+  })
+
+
+  .createTable('LocalListsCandidates', function(table) {
+      // Primary key
+      table.increments('id').primary();
+  
+      // Foreign keys
+      table.integer('N_Id').unsigned().references('N_Id').inTable('Users').onDelete('CASCADE');
+      table.integer('circle_id').unsigned().references('circle_id').inTable('Circles').onDelete('CASCADE');
+      table.integer('local_list_id').unsigned().references('id').inTable('localList').onDelete('CASCADE');
+  
+      // Additional fields
+      table.string('candidate_name').notNullable();
+      table.integer('numOfVotes').defaultTo(0); // New column with default value of 0
+      table.timestamps(true, true); // Adds created_at and updated_at columns
+  
+      // Adding a unique constraint to N_Id
+      // table.unique('N_Id');
+    })
+
+
+
+  
+  
+  ;
 };
 
 exports.down = function(knex) {

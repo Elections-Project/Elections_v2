@@ -1,30 +1,32 @@
-
-
+// في candiController.js
 const knex = require('../config/db');
 
 exports.createCandidate = async (req, res) => {
-    const { N_Id, ListId } = req.body;
+    console.log('Received request to create candidate:', req.body);
 
-    // التحقق من وجود البيانات المطلوبة
-    if (!N_Id || !ListId) {
-        return res.status(400).json({ error: 'مفقود بيانات: N_Id و ListId مطلوبين' });
+    const { N_Id, numOfVotes, candidate_name, local_list_id, circle_id } = req.body;
+
+    if (!N_Id || !numOfVotes || !candidate_name || !local_list_id || !circle_id) {
+        console.error('Missing required fields');
+        return res.status(400).json({ error: 'مفقود بيانات: N_Id و numOfVotes و candidate_name و local_list_id و circle_id مطلوبين' });
     }
 
     const trx = await knex.transaction();
     try {
-        // إدخال بيانات المرشح وربطه بالقائمة داخل معاملة
-        await trx('Candidates').insert({ 
-            N_Id: N_Id, 
-            ListId: ListId 
+        await trx('LocalListsCandidates').insert({ 
+            N_Id,
+            numOfVotes,
+            candidate_name,
+            local_list_id,
+            circle_id
         });
 
-        // تأكيد المعاملة إذا نجح الإدخال
         await trx.commit();
+        console.log('Candidate added successfully');
         res.status(201).json({ message: 'تمت إضافة المرشح وربطه بالقائمة بنجاح!' });
     } catch (error) {
-        // التراجع عن المعاملة في حالة حدوث خطأ
         await trx.rollback();
-        console.error('خطأ أثناء إضافة المرشح:', error); // طباعة تفاصيل الخطأ
+        console.error('Error adding candidate:', error); 
         res.status(500).json({ error: `حدث خطأ أثناء إضافة المرشح: ${error.message}` });
     }
 };

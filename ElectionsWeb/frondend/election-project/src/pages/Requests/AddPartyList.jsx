@@ -23,7 +23,7 @@ function AddPartyList() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3001/api/party', {
+            const response = await axios.post('http://localhost:3002/api/party', {
                 name: listName,
                 organizer: organizer,
                 logo: logo,

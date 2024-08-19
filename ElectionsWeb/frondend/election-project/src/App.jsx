@@ -13,7 +13,7 @@ import Voting from './pages/Voting/voting';
 import LocalRequest from './pages/Requests/LocalRequest';
 import CandidatesRequest from './pages/Requests/CandidatesRequest';
 import AddList from './pages/Requests/AddList';
-
+import AddPartyList from './pages/Requests/AddPartyList'
 import Debate_ from './pages/Debate/debate';
 import Debate_Room from './pages/Debate/room';
 import Debate_screen from './pages/Debate/debate_screen';
@@ -42,7 +42,6 @@ function App() {
         <Route path="/debate-screen" element={<Debate_screen />} />
         <Route path="/debate-room/:roomId" element={<Debate_Room />} />
         <Route path="/debate" element={<Debate_ />} />
-
         <Route path="/" element={<Home />} />
         <Route path="/candidates" element={<Candidates />} />
         <Route path="/aboutUs" element={<AboutUs />} />
