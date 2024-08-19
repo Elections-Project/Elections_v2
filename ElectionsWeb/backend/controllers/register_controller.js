@@ -85,18 +85,12 @@ exports.log_in = async (req, res) => {
   console.log("inside log in");
   try {
     const user = await db('Users')
-      .select('*')
-      .where('N_Id', nid)
-      .first();
+    .select('N_Id', 'name', 'password') // استبدل 'Username' باسم العمود الفعلي لاسم المستخدم
+    .where('N_Id', nid)
+    .first();
 
     if (user && await bcrypt.compare(pass, user.password)) {
-      const token = jwt.sign(user, "tegthtyh3c25d5a5ddfdfd", { expiresIn: '1h' });
-
-      await db('Users')
-        .where('N_Id', nid)
-        .update({
-          token: token,
-        });
+      const token = jwt.sign( user , "tegthtyh3c25d5a5ddfdfd", { expiresIn: '1h' });
 
       console.log("Log in successfully :) !!");
 

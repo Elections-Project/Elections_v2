@@ -14,14 +14,21 @@ const ChatBox = () => {
 
     try {
       const token = localStorage.getItem('token');
+        if (token){
       const response = await axios.post("http://localhost:3001/api/chatuser", 
         { UserMessage: inputMessage }, 
         { headers: { Authorization: `Bearer ${token}` } } // إضافة التوكن في رأس الطلب
       );
       setInputMessage("");
-      fetchMessages();
+      
+        fetchMessages();
+      }else {
+      alert("للاستفادة من ميزة الدردشة، يتعين عليك تسجيل الدخول أولاً.")
+      setInputMessage("");
+
+      }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
   const token = localStorage.getItem('token');
@@ -40,8 +47,13 @@ const ChatBox = () => {
     }
   };
 
+
+  
   useEffect(() => {
-    fetchMessages();
+    if (token){
+      fetchMessages();
+    }
+    
   }, [isOpen]);
 
   useEffect(() => {
