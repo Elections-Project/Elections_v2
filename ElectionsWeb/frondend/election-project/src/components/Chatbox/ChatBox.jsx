@@ -13,19 +13,25 @@ const ChatBox = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/api/chatuser", {
-        UserMessage: inputMessage,
-      });
+      const token = localStorage.getItem('token');
+      const response = await axios.post("http://localhost:3001/api/chatuser", 
+        { UserMessage: inputMessage }, 
+        { headers: { Authorization: `Bearer ${token}` } } // إضافة التوكن في رأس الطلب
+      );
       setInputMessage("");
       fetchMessages();
     } catch (err) {
       console.log(err);
     }
   }
-
+  const token = localStorage.getItem('token');
   const fetchMessages = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/getmessages");
+      const response = await axios.get('http://localhost:3001/api/getmessages', {
+        headers: {
+          Authorization: `Bearer ${token}`, // التأكد من إرسال التوكن في header
+        },
+      });;
 
       const sortedMessages = response.data.sort((a, b) => a.M_Id - b.M_Id);
       setMessages(sortedMessages);
