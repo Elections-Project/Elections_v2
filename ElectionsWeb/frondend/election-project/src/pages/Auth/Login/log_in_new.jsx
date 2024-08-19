@@ -56,7 +56,7 @@ const Log_in_new = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex justify-center items-center p-4"
+    <div className="min-h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex justify-center items-center "
       style={{
         backgroundImage: "url('https://png.pngtree.com/background/20230710/original/pngtree-jordanian-flag-painting-adorns-brick-wall-solid-square-symbol-photo-picture-image_4200049.jpg')",
         backgroundRepeat: "no-repeat",
@@ -65,64 +65,66 @@ const Log_in_new = () => {
         width: "100%", // Set to your desired width
         height: "100vh" // Set to your desired height or use a specific value
       }} >
-      <div className="bg-white/20 backdrop-blur-lg w-full max-w-md rounded-lg p-8 shadow-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center">التسجيل للمشاركة في الانتخابات</h2>
-        <h3 className="text-lg mb-6 text-center">تم ارسال كلمة مرور مؤقتة على ايملك</h3>
-        <form className="space-y-6" onSubmit={handel_submit}>
-          <div>
-            <label htmlFor="nationalId" className="block text-sm font-medium mb-1">الرقم الوطني</label>
-            <div className="relative">
+      <div className="min-h-screen w-full bg-black bg-opacity-50 flex justify-center items-center p-4">
+        <div className="bg-white/20 backdrop-blur-lg w-full max-w-md rounded-lg p-8 shadow-lg">
+          <h2 className="text-3xl font-bold mb-6 text-center">التسجيل للمشاركة في الانتخابات</h2>
+          <h3 className="text-lg mb-6 text-center">تم ارسال كلمة مرور مؤقتة على ايملك</h3>
+          <form className="space-y-6" onSubmit={handel_submit}>
+            <div>
+              <label htmlFor="nationalId" className="block text-sm font-medium mb-1">الرقم الوطني</label>
+              <div className="relative">
+                <input
+                  id="nationalId"
+                  name="nationalId"
+                  type="text"
+                  placeholder="أدخل الرقم الوطني"
+                  value={nid}
+                  onChange={(e) => { set_nid(e.target.value) }}
+                  className={`w-full pl-3 pr-10 py-2 bg-white/10 text-white placeholder-gray-300 rounded-md border ${errors.nid ? 'border-red-500' : 'border-white/30'} focus:ring-2 focus:ring-green-400 focus:border-transparent`}
+                  required
+                />
+                <LogIn className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              </div>
+              {errors.nid && <p className="text-red-500 text-xs mt-1">{errors.nid}</p>}
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-1">البريد الإلكتروني</label>
               <input
-                id="nationalId"
-                name="nationalId"
-                type="text"
-                placeholder="أدخل الرقم الوطني"
-                value={nid}
-                onChange={(e) => { set_nid(e.target.value) }}
-                className={`w-full pl-3 pr-10 py-2 bg-white/10 text-white placeholder-gray-300 rounded-md border ${errors.nid ? 'border-red-500' : 'border-white/30'} focus:ring-2 focus:ring-green-400 focus:border-transparent`}
+                id="email"
+                name="email"
+                type="email"
+                placeholder="أدخل بريدك الإلكتروني"
+                value={email}
+                onChange={(e) => { set_email(e.target.value) }}
+                className="w-full px-3 py-2 bg-white/10 text-white placeholder-gray-300 rounded-md border border-white/30 focus:ring-2 focus:ring-green-400 focus:border-transparent"
                 required
               />
-              <LogIn className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
             </div>
-            {errors.nid && <p className="text-red-500 text-xs mt-1">{errors.nid}</p>}
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">البريد الإلكتروني</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="أدخل بريدك الإلكتروني"
-              value={email}
-              onChange={(e) => { set_email(e.target.value) }}
-              className="w-full px-3 py-2 bg-white/10 text-white placeholder-gray-300 rounded-md border border-white/30 focus:ring-2 focus:ring-green-400 focus:border-transparent"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-1">كلمة المرور المؤقتة</label>
-            <div className="relative">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="أدخل كلمة المرور المؤقتة"
-                value={otp}
-                onChange={(e) => { set_otp(e.target.value) }}
-                className={`w-full pl-3 pr-10 py-2 bg-white/10 text-white placeholder-gray-300 rounded-md border ${errors.otp ? 'border-red-500' : 'border-white/30'} focus:ring-2 focus:ring-green-400 focus:border-transparent`}
-                required
-              />
-              <LogIn className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium mb-1">كلمة المرور المؤقتة</label>
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="أدخل كلمة المرور المؤقتة"
+                  value={otp}
+                  onChange={(e) => { set_otp(e.target.value) }}
+                  className={`w-full pl-3 pr-10 py-2 bg-white/10 text-white placeholder-gray-300 rounded-md border ${errors.otp ? 'border-red-500' : 'border-white/30'} focus:ring-2 focus:ring-green-400 focus:border-transparent`}
+                  required
+                />
+                <LogIn className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              </div>
+              {errors.otp && <p className="text-red-500 text-xs mt-1">{errors.otp}</p>}
             </div>
-            {errors.otp && <p className="text-red-500 text-xs mt-1">{errors.otp}</p>}
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50"
-          >
-            تسجيل
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50"
+            >
+              تسجيل
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

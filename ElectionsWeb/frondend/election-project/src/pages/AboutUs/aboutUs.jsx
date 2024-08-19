@@ -33,11 +33,11 @@ const AboutUs = () => {
                 </div>
               </div>
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">قيمنا</h2>
-              <ul className="text-gray-600 text-right">
-                <li>الشفافية</li>
-                <li>النزاهة</li>
-                <li>الحيادية</li>
-                <li>الكفاءة</li>
+              <ul className=" flex text-gray-600 text-right">
+                <li className='m-1'>الشفافية</li>
+                <li className='m-1'>النزاهة</li>
+                <li className='m-1'>الحيادية</li>
+                <li className='m-1'>الكفاءة</li>
               </ul>
             </div>
           </div>
