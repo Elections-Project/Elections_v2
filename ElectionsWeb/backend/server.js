@@ -21,6 +21,10 @@ const db = require('./config/db'); // استيراد الاتصال بقاعدة
 require('dotenv').config();
 const cors = require('cors');
 const listController = require('./controllers/listController'); // تأكد من أنك قد أنشأت هذا الملف
+const candiController = require('./controllers/candiController'); // تأكد من أنك قد أنشأت هذا الملف
+const userRoutes = require('./routes/userRoutes');
+const partyRoutes = require('./routes/partyRoutes');
+
 const listRoutes = require('./routes/listRoutes');
 const app = express();
 const PORT = 3001;
@@ -58,3 +62,7 @@ app.delete('/api/lists', listController.deleteList);
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+
+

@@ -10,7 +10,8 @@ import AboutUs from './pages/AboutUs/aboutUs';
 import ElectionLists from './pages/ElectionLists/electionLists';
 import Results from './pages/Results/results';
 import Voting from './pages/Voting/voting';
-import LocalRequest from './pages/Requests/localRequest';
+import LocalRequest from './pages/Requests/LocalRequest';
+import CandidatesRequest from './pages/Requests/CandidatesRequest';
 import AddList from './pages/Requests/AddList';
 
 import Debate_ from './pages/Debate/debate';
@@ -25,6 +26,7 @@ import Invoice from './pages/Invoice/Invoice';
 import ADS_Page from './pages/RequestAds/AdsPage';
 import Debate from './pages/RequestAds/Debate';
 
+import AddPartyList from './pages/Requests/AddPartyList';
 import './App.css';
 import './index.css';
 
@@ -35,6 +37,7 @@ function App() {
     <Router>
       <Routes>
 
+        {/* <Route path="/" element={<Navigate to="/debate-screen" replace />} /> */}
         {/* <Route path="/" element={<Navigate to="/debate-screen" replace />} /> */}
         <Route path="/debate-screen" element={<Debate_screen />} />
         <Route path="/debate-room/:roomId" element={<Debate_Room />} />
@@ -58,6 +61,8 @@ function App() {
         <Route path="/voting" element={<Voting />} />
         <Route path="/localRequest" element={<LocalRequest />} />
         <Route path="/AddList" element={<AddList />} />
+        <Route path="/AddPartyList" element={<AddPartyList />} />
+        <Route path="/CandidatesRequest" element={<CandidatesRequest />} />
 
         <Route path="/voting" element={<Voting />} />
 

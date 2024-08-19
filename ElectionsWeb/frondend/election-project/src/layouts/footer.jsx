@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logoJOR from '../assets/images/logoJOR.png';
-
 const navigation = {
     main: [
         { name: 'الرئيسية', href: '/' },
